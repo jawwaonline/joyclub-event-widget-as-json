@@ -35,6 +35,19 @@ function parseClubEventsData(data, clubID) {
       const date = new Date(dateArray[2], dateArray[1] - 1, dateArray[0]);
       date.setHours(0, 0, 0, 0);
 
+      let registrations;
+      let registrationInfo;
+
+      const registrationsText = $(li).find(".anmeldungen").text().trim();
+
+      if (registrationsText && registrationsText.match(/\d+/)) {
+        registrations = parseInt(registrationsText.match(/\d+/)[0]);
+        registrationInfo = "";
+      } else {
+        registrationInfo = registrationsText;
+        registrations = 0;
+      }
+
       const imagesWithSize = $("source").attr("srcset").split(",");
       const images = imagesWithSize.map((imageelement) => {
         imageelement = imageelement.trim();
@@ -47,13 +60,23 @@ function parseClubEventsData(data, clubID) {
         return image;
       });
 
-      console.log(imagesWithSize);
-
       const title = $(li).find("h2").text().trim();
 
       const event = {
         id: clubID,
-        events: [{ clubID, title, dateText, date, link, images }],
+        events: [
+          {
+            clubID,
+            title,
+            dateText,
+            date,
+            link,
+            images,
+            registrationInfo,
+            registrations,
+            registrationsText,
+          },
+        ],
       };
 
       return event;
