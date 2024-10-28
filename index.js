@@ -35,15 +35,19 @@ function parseClubEventsData(data, clubID) {
       const date = new Date(dateArray[2], dateArray[1] - 1, dateArray[0]);
       date.setHours(0, 0, 0, 0);
 
-      const images = $("source")
-        .attr("srcset")
-        .split(",")
-        .map((image) => {
-          const url = image.split(" ")[0];
-          return {
-            url,
-          };
-        });
+      const imagesWithSize = $("source").attr("srcset").split(",");
+      const images = imagesWithSize.map((imageelement) => {
+        imageelement = imageelement.trim();
+        const [url, size] = imageelement.split(" ");
+
+        const image = {
+          url,
+          size,
+        };
+        return image;
+      });
+
+      console.log(imagesWithSize);
 
       const title = $(li).find("h2").text().trim();
 
