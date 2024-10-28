@@ -40,10 +40,8 @@ function parseClubEventsData(data, clubID) {
         .split(",")
         .map((image) => {
           const url = image.split(" ")[0];
-          const size = image.split(" ")[1];
           return {
             url,
-            size,
           };
         });
 
