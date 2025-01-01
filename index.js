@@ -89,7 +89,14 @@ function parseClubEventsData(data, clubID) {
 app.get("/api/", (req, res) => {
   res.json({
     message: "API is up and running",
-    info: "get events for specific ClubID /api/events/club/:clubID",
+    info: "get www.joyclub.de events for specific ClubID /api/events/club/:clubID",
+  });
+});
+
+app.get("/", (req, res) => {
+  res.json({
+    message: "API is up and running",
+    info: "get https://www.joyclub.de events for specific ClubID https://joyclub-events-widget.joymini.de/api/events/club/:clubID",
   });
 });
 
